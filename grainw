@@ -1,0 +1,115 @@
+#!/usr/bin/env bash
+
+cygwin=false
+case "`uname`" in
+  CYGWIN* )
+    cygwin=true
+    ;;
+esac
+
+if $cygwin ; then
+    [ -n "$JAVA_HOME" ] && JAVA_HOME=`cygpath --unix "$JAVA_HOME"`
+fi
+
+# Determine command to run java
+if [ -n "$JAVA_HOME" ] ; then
+    if [ -x "$JAVA_HOME/jre/sh/java" ] ; then
+        JAVACMD="$JAVA_HOME/jre/sh/java"
+    else
+        JAVACMD="$JAVA_HOME/bin/java"
+    fi
+    if [ ! -x "$JAVACMD" ] ; then
+        die "ERROR: JAVA_HOME is set to an invalid directory: $JAVA_HOME
+
+Please set the JAVA_HOME variable in your environment to match the
+location of your Java installation."
+    fi
+else
+    JAVACMD="java"
+    which java >/dev/null 2>&1 || die "ERROR: JAVA_HOME is not set and no 'java' command could be found in your PATH.
+
+Please set the JAVA_HOME variable in your environment to match the
+location of your Java installation."
+fi
+
+# Determine java options
+if [ -n "$GRAIN_OPTS" ]
+   then
+     GRAIN_OPTS="$GRAIN_OPTS"
+   else
+     GRAIN_OPTS="-server -Xmx256M -Xms32M -XX:PermSize=32m -XX:MaxPermSize=128m"
+  fi
+JAVA_OPTS="$GRAIN_OPTS $JAVA_OPTS"
+
+# Get target Grain version
+APP_PROPS="application.properties"
+
+if [ ! -f $APP_PROPS ]; then
+    echo "Error: $APP_PROPS not found";
+    exit 1;
+fi
+
+while read line; do
+    case "$line" in 
+        *grain.version*)
+            TMP_VERSION="${line#*=}";
+            read -r GRAIN_VERSION << eof
+$TMP_VERSION
+eof
+        ;;
+    esac
+done < $APP_PROPS
+
+if [ -z "$GRAIN_VERSION" ]; then
+    echo "Error: unable to determine Grain version from $APP_PROPS";
+    exit 1;
+fi
+
+# Check if site deps exists for current Grain version
+SITE_DEPS=".site-${GRAIN_VERSION}.dep"
+
+if [ ! -f $SITE_DEPS ]; then
+    # Site deps don't exist - generate them
+    ./gradlew gendeps
+    if [ $? -ne 0 ]; then
+       exit 1;
+    fi
+fi
+
+function validateAndLaunch() {
+    # Get Grain JAR from site deps
+    read -r GRAIN_JAR < $SITE_DEPS
+    if $cygwin ; then
+        GRAIN_JAR=`cygpath --unix "$GRAIN_JAR"`
+    fi
+
+    if [ ! -f $GRAIN_JAR ]; then
+        # Grain Jar doesn't exist - regenerate site deps and recompute Grain Jar
+        ./gradlew gendeps
+        if [ $? -ne 0 ]; then
+            exit 1;
+        fi
+        read -r GRAIN_JAR < $SITE_DEPS
+    fi
+
+    if $cygwin ; then
+        GRAIN_JAR=`cygpath --path --mixed "$GRAIN_JAR"`
+    fi
+    # Check if site deps are valid
+    "$JAVACMD" $JAVA_OPTS -cp $GRAIN_JAR com.sysgears.grain.SiteLauncher $GRAIN_VERSION -- "$@"
+
+    return $?
+}
+
+validateAndLaunch "$@"
+STATUS=$?
+if [ $STATUS -eq 2 ]; then
+    ./gradlew gendeps
+    if [ $? -ne 0 ]; then
+       exit 1;
+    fi
+    validateAndLaunch "$@"
+    STATUS=$?
+fi
+
+exit $STATUS
