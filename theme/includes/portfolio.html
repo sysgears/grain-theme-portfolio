@@ -1,0 +1,69 @@
+<!-- Portfolio -->
+<section id="portfolio" class="portfolio">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-10 col-lg-offset-1 text-center">
+                <h2>${page.portfolio.title}</h2>
+                <hr class="small">
+                <div class="row">
+                    <% page.portfolio.projects.each { project -> %>
+                    <div class="col-md-6">
+                        <div class="portfolio-item">
+                            <a href="#${project.modal}" class="porfolio-link" data-toggle="modal">
+                                <img class="img-portfolio img-responsive" src="${project.image}">
+                            </a>
+                        </div>
+                    </div>
+                    <% } %>
+                </div>
+                <!-- /.row (nested) -->
+                <a href="${page.portfolio.buttonlink}" class="btn btn-dark">${page.portfolio.button}</a>
+            </div>
+            <!-- /.col-lg-10 -->
+        </div>
+        <!-- /.row -->
+    </div>
+    <!-- /.container -->
+</section>
+
+<!-- Portfolio Modals -->
+<% page.portfolio.modals.each { modal -> %>
+<div class="portfolio-modal modal fade" id="${modal.id}" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-content">
+        <div class="close-modal" data-dismiss="modal">
+            <div class="lr">
+                <div class="rl">
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2">
+                    <div class="modal-body">
+                        <h2>${modal.title}</h2>
+                        <hr class="star-primary">
+                        <img src="${modal.image}" class="img-responsive img-centered" alt="">
+                        <p>${modal.text}</p>
+                        <ul class="list-inline item-details">
+                            <li>Client:
+                                <strong><a href="${modal.link}">${modal.client}</a>
+                                </strong>
+                            </li>
+                            <li>Date:
+                                <strong><a href="${modal.link}">${modal.date}</a>
+                                </strong>
+                            </li>
+                            <li>Service:
+                                <strong><a href="${modal.link}">${modal.service}</a>
+                                </strong>
+                            </li>
+                        </ul>
+                        <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<% } %>
+
