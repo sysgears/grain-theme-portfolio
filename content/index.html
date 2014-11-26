@@ -24,15 +24,40 @@ services:
         - name: Service Name
           image: fa-cloud
           text: Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+          modal: serviceModal1
         - name: Service Name
           image: fa-compass
           text: Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+          modal: serviceModal2
         - name: Service Name
           image: fa-flask
           text: Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+          modal: serviceModal3
         - name: Service Name
           image: fa-shield
-          text: Lorem ipsum dolor sit amet, consectetur adipisicing elit.http://fortawesome.github.io/Font-Awesome/icons/
+          text: Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+          modal: serviceModal4
+    modals:
+        - id: serviceModal1
+          title: Service Name
+          text: Use this area of the page to describe your service.
+          image: images/portfolio-1.jpg
+
+        - id: serviceModal2
+          title: Service Name
+          text: Use this area of the page to describe your service.
+          image: images/portfolio-2.jpg
+
+        - id: serviceModal3
+          title: Service Name
+          text: Use this area of the page to describe your service.
+          image: images/portfolio-3.jpg
+
+        - id: serviceModal4
+          title: Service Name
+          text: Use this area of the page to describe your service.
+          image: images/portfolio-4.jpg
+
 callout:
     text: Vertically Centered Text
 portfolio:

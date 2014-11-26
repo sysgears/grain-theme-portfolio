@@ -18,7 +18,7 @@
                                 <strong>${type.name}</strong>
                             </h4>
                             <p>${type.text}</p>
-                            <a href="#" class="btn btn-light">Learn More</a>
+                            <a href="#${type.modal}" class="btn btn-light" data-toggle="modal">Learn More</a>
                         </div>
                     </div>
                     <% } %>
@@ -31,3 +31,30 @@
     </div>
     <!-- /.container -->
 </section>
+
+<!-- Service Modals -->
+<% page.services.modals.each { modal -> %>
+<div class="portfolio-modal modal fade" id="${modal.id}" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-content">
+        <div class="close-modal" data-dismiss="modal">
+            <div class="lr">
+                <div class="rl">
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2">
+                    <div class="modal-body">
+                        <h2>${modal.title}</h2>
+                        <hr class="star-primary">
+                        <img src="${modal.image}" class="img-responsive img-centered" alt="">
+                        <p>${modal.text}</p>
+                        <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<% } %>

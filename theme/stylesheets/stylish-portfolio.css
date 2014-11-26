@@ -297,3 +297,7 @@ footer {
     -ms-transform: rotate(90deg);
     transform: rotate(90deg);
 }
+
+.img-centered {
+    margin: 0 auto;
+}
