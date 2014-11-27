@@ -1,7 +1,8 @@
-#Grain Bootstrap Theme Stylish Portfolio
+![Banner](https://raw.githubusercontent.com/sysgears/grain-theme-portfolio/master/banner.jpg)
 
-This theme is based on Start Bootstrap [Stylish Portfolio Template] and
-was adapted for [Grain] framework.
+#Grain Bootstrap Stylish Portfolio Theme
+
+This [Grain] theme is based on Start Bootstrap [Stylish Portfolio Template].
 
 Please, refer to the [documentation][documentation] for further details.
 
