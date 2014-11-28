@@ -4,7 +4,7 @@
 
 This [Grain] theme is based on Start Bootstrap [Stylish Portfolio Template].
 
-Please, refer to the [documentation][documentation] for further details.
+Please, refer to the [theme page] and the [documentation] for further details.
 
 Contributing
 ============
@@ -100,4 +100,5 @@ Grain Bootstrap Theme Stylish Portfolio is licensed under the terms of the
 [Apache License, Version 2.0]: http://www.apache.org/licenses/LICENSE-2.0.html
 [Developer Certificate of Origin]: https://raw.github.com/sysgears/grain/master/DCO
 [Stylish Portfolio Template]: http://startbootstrap.com/template-overviews/stylish-portfolio/
+[theme page]: http://sysgears.com/grain/themes/portfolio/
 [documentation]: http://sysgears.com/grain/docs/latest/
