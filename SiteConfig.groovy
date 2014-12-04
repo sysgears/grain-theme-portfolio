@@ -7,7 +7,8 @@ resource_mapper = new ResourceMapper(site).map
 tag_libs = [ThemeTagLib]
 
 features {
-    highlight = 'pygments' // 'none', 'pygments'
+    compass = 'none'
+    highlight = 'none' // 'none', 'pygments'
     markdown = 'txtmark'   // 'txtmark', 'pegdown'
 }
 
