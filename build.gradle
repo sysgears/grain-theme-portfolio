@@ -4,7 +4,7 @@ apply plugin: 'idea'
 apply plugin: 'eclipse'
 
 group = 'com.sysgears.grain'
-version = '0.4.0'
+version = '0.4.1'
 defaultTasks 'preview'
 
 ext {
