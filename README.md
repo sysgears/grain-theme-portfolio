@@ -1,6 +1,7 @@
 ![Banner](https://raw.githubusercontent.com/sysgears/grain-theme-portfolio/master/banner.jpg)
 
-#Grain Bootstrap Stylish Portfolio Theme
+Grain Bootstrap Stylish Portfolio Theme
+=======================================
 
 This [Grain] theme is based on Start Bootstrap [Stylish Portfolio Template].
 
