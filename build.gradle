@@ -9,7 +9,7 @@ defaultTasks 'preview'
 
 ext {
     mainClassName = 'com.sysgears.grain.Main'
-    compatibilityVersion = JavaVersion.VERSION_1_5
+    compatibilityVersion = JavaVersion.VERSION_1_7
 }
 
 sourceCompatibility = compatibilityVersion
